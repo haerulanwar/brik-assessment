@@ -3,6 +3,7 @@
 This is test assessment from BRIK, test case can be found [here](https://github.com/brik-id/test-be-l2-en)
 
 ## Project setup
+This app mean for docker only, since no ENV file provided
 
 ```bash
 $ docker compose up --build
