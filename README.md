@@ -40,11 +40,31 @@ API Routes
 |/categories/:id|	DELETE|		CategoryController|
 |/categories/:id|	PUT|		CategoryController|
 |/file/upload|	POST|	FileController|
+|/sale| POST| SaleController|
+|/sale/history| GET| SaleController|
+|/sale/history/:id| GET| SaleController|
 
 ## Sample Curl
 These are sample curl, please import to postman for further modification for testing purpose
 
-Product POST
+Category POST (should do this first so we can have 1st category before add products)
+```
+curl --location 'http://localhost:3000/categories' \
+--header 'content-type: application/json' \
+--data '{
+    "name": "name #2"
+}'
+```
+Category PUT
+```
+curl --location 'http://localhost:3000/categories/1' \
+--header 'content-type: application/json' \
+--data '{
+    "name": "name #2"
+}'
+```
+
+Product POST (depend on category id)
 ```
 curl --location 'http://localhost:3000/products' \
 --header 'content-type: application/json' \
@@ -90,21 +110,24 @@ curl --location 'http://localhost:3000/products?page=1&limit=10&filter=sku%3Alik
 --header 'content-type: application/json'
 ```
 
-Category POST
+Sale POST (depend on product id)
 ```
-curl --location 'http://localhost:3000/categories' \
+curl --location 'http://localhost:3000/sales' \
 --header 'content-type: application/json' \
 --data '{
-    "name": "name #2"
+    "productId": 1,
+    "qty": 1
 }'
 ```
-Category PUT
+Sale History GET (get all sale)
 ```
-curl --location 'http://localhost:3000/categories/1' \
---header 'content-type: application/json' \
---data '{
-    "name": "name #2"
-}'
+curl --location 'http://localhost:3000/sales/history?page=1&limit=10' \
+--header 'content-type: application/json'
+```
+Sale History byProduct GET (get all sale by product id)
+```
+curl --location 'http://localhost:3000/sales/history/1?page=1&limit=10' \
+--header 'content-type: application/json'
 ```
 
 File POST
